@@ -1,0 +1,16 @@
+---
+- name: checking version
+  hosts: lab
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: run multiple commands and evaluate the output
+    eos_command:
+      provider: provider
+      commands:
+        - show version
+        - show interfaces
+      wait_for:
+        - result[0] contains Arista
+        - result[1] contains Loopback0

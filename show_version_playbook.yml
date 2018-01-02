@@ -1,0 +1,18 @@
+---
+- hosts: lab #This is a reference to my group for all Spine/Leaf switches described in my Ansible hosts file.
+  gather_facts: no
+  connection: local #This sets the playbook to connect via the API using the details described in my .eapi.conf file.
+  vars: #I define some variables I want displayed in my captured output of ‘show version’.  More on this later.
+    modelName:  "{{ eos_command_output.output[0].result.modelName }}"
+    internalVersion: "{{ eos_command_output.output[0].result.internalVersion }}"
+
+    tasks:
+    - name: execute show version
+      eos_command: #- For this task I am going to use the Arista Ansible module eos_command.  This allows the running of any command in privileged EXEC mode.
+        commands='show version' #Execute a ‘show version’ command.  Note – You cannot shorten a command when executing from the API as you can from the CLI. ‘sh ver’ will not work.
+        connection={{ inventory_hostname }} #This is an Ansible ‘Magic’ variable and references the hostname as configured in the hosts file.  This sets up a connection to each of the switches in my group alldataswitches.  Connections are executed serially.
+      register:
+        eos_command_output #Register sets a variable based upon the results of the task.  In this case this sets a dictionary as a variable containing the output of a ‘show version’.
+
+   - name: output to template #This task sends the variables gathered from the previous task through a jinja2 template and records the results.  More on this next.
+     template: src=/etc/ansible/playbooks/bau/shversion/showver_output.j2 dest=/etc/ansible/playbooks/bau/shversion/testresults/{{ inventory_hostname }}.showveryam
