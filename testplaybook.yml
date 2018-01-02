@@ -1,0 +1,21 @@
+---
+- name: checking version
+  hosts: lab
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: gathering version from device
+      eos_facts:
+        provider:
+          transport: eapi
+          username: eos
+          password: eos
+          use_ssl: no
+        gather_subset: all
+        #register: result
+    - set_fact:
+        fact1: "{{ ansible_net_hostname }}"
+    - name: Display Hostname
+      debug:
+        msg: "{{fact1}}"

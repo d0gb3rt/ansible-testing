@@ -1,0 +1,6 @@
+---
+- provider:
+  host: "{{ inventory_hostname }}"
+  username: eos
+  password: eos
+  use_ssl: no
