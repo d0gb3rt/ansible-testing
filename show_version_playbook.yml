@@ -2,16 +2,16 @@
 - hosts: lab #This is a reference to my group for all Spine/Leaf switches described in my Ansible hosts file.
   gather_facts: no
   connection: local #This sets the playbook to connect via the API using the details described in my .eapi.conf file.
-  vars: #I define some variables I want displayed in my captured output of ‘show version’.  More on this later.
-    modelName:  "{{ eos_command_output.output[0].result.modelName }}"
-    internalVersion: "{{ eos_command_output.output[0].result.internalVersion }}"
-
-    tasks:
+  tasks:
     - name: execute show version
       eos_command:
         provider: '{{ eos_connection }}'
         commands:
           - show version
         register: eos_command_output
+    - name: setting variables of Output
+      set_fact:
+        modelName:  "{{ eos_command_output.output[0].result.modelName }}"
+        internalVersion: "{{ eos_command_output.output[0].result.internalVersion }}"
     - name: output to template
       template: src=/root/git/ansible-testing/shversion/showver_output.j2 dest=/root/git/ansible-testing/shversion/testresults/{{ inventory_hostname }}.showveryam
