@@ -9,9 +9,9 @@
     tasks:
     - name: execute show version
       eos_command:
-      provider: '{{ eos_connection }}'
+        provider: '{{ eos_connection }}'
         commands:
-        - show version
+          - show version
         register: eos_command_output #Register sets a variable based upon the results of the task.  In this case this sets a dictionary as a variable containing the output of a ‘show version’.
 
    - name: output to template #This task sends the variables gathered from the previous task through a jinja2 template and records the results.  More on this next.
