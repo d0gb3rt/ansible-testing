@@ -4,3 +4,4 @@
   username: eos
   password: eos
   use_ssl: no
+  transport: eapi
