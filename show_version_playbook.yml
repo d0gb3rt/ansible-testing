@@ -13,7 +13,7 @@
     - debug: msg= "{{ eos_output }}"
     - name: setting variables of Output
       set_fact:
-        modelName:  "{{ eos_output[0].msg.stdout_lines.modelName }}"
-        internalVersion: "{{ eos_output[0].msg.stdout_lines.internalVersion }}"
+        modelName:  "{{ eos_output.msg.stdout_lines.modelName }}"
+        internalVersion: "{{ eos_output.msg.stdout_lines.internalVersion }}"
     - name: output to template
       template: src=/root/git/ansible-testing/shversion/showver_output.j2 dest=/root/git/ansible-testing/shversion/testresults/{{ inventory_hostname }}.showveryam
