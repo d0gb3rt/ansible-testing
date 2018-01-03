@@ -11,6 +11,9 @@
       register: eos_output
     - debug: var=eos_output
     - debug: msg= "{{ eos_output }}"
+    - name: "Display all cluster names"
+      debug: var=eos_output
+      with_items: "{{eos_output|json_query('stdout."modelName')}}"
     - name: setting variables of Output
       set_fact:
         modelName:  "{{ eos_output.msg.stdout_lines.modelName }}"
