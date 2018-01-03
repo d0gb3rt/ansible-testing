@@ -16,7 +16,6 @@
         #register: result
     - set_fact:
         fact1: "{{ ansible_net_hostname }}"
-        fact2: "{{ ansible_net_all_ipv4_addresses }}"
     - name: Display Hostname
       debug:
-        msg: "{{fact1}} {{fact2}}"
+        msg: "{{fact1}}"
