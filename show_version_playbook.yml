@@ -12,7 +12,7 @@
     - debug: var=eos_output
     - name: "show only version"
       debug: var=item
-      with_items: "{{ eos_output|to_json|from_json|json_query('stdout.version') }}"
+      with_items: "{{ eos_output|to_json|from_json|json_query('stdout') }}"
     - name: setting variables of Output
       set_fact:
         modelName:  "{{ eos_output|json_query('stdout.version') }}"
