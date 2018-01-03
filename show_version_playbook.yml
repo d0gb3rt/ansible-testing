@@ -5,6 +5,7 @@
   vars:
     modelName:  "{{ eos_output.stdout_lines[0].modelName }}"
     internalVersion: "{{ eos_output.stdout_lines[0].internalVersion }}"
+    systemMacAddress: "{{ eos_output.stdout_lines[0].systemMacAddress }}"
   tasks:
     - name: execute show version
       eos_command:
