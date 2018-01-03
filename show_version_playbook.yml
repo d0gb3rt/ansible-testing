@@ -2,6 +2,9 @@
 - hosts: lab #This is a reference to my group for all Spine/Leaf switches described in my Ansible hosts file.
   gather_facts: no
   connection: local #This sets the playbook to connect via the API using the details described in my .eapi.conf file.
+  vars:
+    modelName:  "{{ eos_command_output.output[0].result.modelName }}"
+    internalVersion: "{{ eos_command_output.output[0].result.internalVersion }}"
   tasks:
     - name: execute show version
       eos_command:
@@ -9,14 +12,14 @@
         commands:
           - show version
       register: eos_output
-    - debug: var=eos_output
-    - name: "show only version"
-      debug: var=item
-      with_items: "{{ eos_output|to_json|from_json|json_query('stdout') }}"
-    - name: setting variables of Output
-      set_fact:
-        modelName:  "{{ eos_output|json_query('stdout.version') }}"
-    - debug: msg= {{ modelName }}
+#    - debug: var=eos_output
+#    - name: "show only version"
+#      debug: var=item
+#      with_items: "{{ eos_output|to_json|from_json|json_query('stdout') }}"
+#    - name: setting variables of Output
+#      set_fact:
+#        modelName:  "{{ eos_output|json_query('stdout.version') }}"
+#    - debug: msg= {{ modelName }}
 #        internalVersion: "{{ eos_output.msg.stdout_lines.internalVersion }}"
-#    - name: output to template
-#      template: src=/root/git/ansible-testing/shversion/showver_output.j2 dest=/root/git/ansible-testing/shversion/testresults/{{ inventory_hostname }}.showveryam
+    - name: output to template
+      template: src=/root/git/ansible-testing/shversion/showver_output.j2 dest=/root/git/ansible-testing/shversion/testresults/{{ inventory_hostname }}.showveryam
