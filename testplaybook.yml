@@ -3,6 +3,8 @@
   hosts: lab
   connection: local
   gather_facts: no
+  vars:
+    management_address: "{{ ansible_net_interfaces.Management1.ipv4.address }}"
 
   tasks:
     - name: gathering version from device
@@ -20,3 +22,8 @@
     - name: Display Hostname
       debug:
         msg: "{{fact1}}"
+    - debug: var=management_address
+
+
+
+#modelName:  "{{ eos_output.stdout_lines[0].modelName }}"
