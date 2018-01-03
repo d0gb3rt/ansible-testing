@@ -14,3 +14,11 @@
          - command: show running-config section Ethernet1\b
            output: text
          - show ip route
+  tasks:
+  - name: run some commands and show the output
+    eos_command:
+      provider: '{{ eos_connection }}'
+      commands:
+        - show version
+    register: eos_output
+      - debug: msg="{{ eos_output }}"
