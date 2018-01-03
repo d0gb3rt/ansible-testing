@@ -3,8 +3,8 @@
   gather_facts: no
   connection: local #This sets the playbook to connect via the API using the details described in my .eapi.conf file.
   vars:
-    modelName:  "{{ eos_output.output[0].result.modelName }}"
-    internalVersion: "{{ eos_output.output[0].result.internalVersion }}"
+    modelName:  "{{ eos_output.stdout_lines[0].result.modelName }}"
+    internalVersion: "{{ eos_output.stdout_lines[0].result.internalVersion }}"
   tasks:
     - name: execute show version
       eos_command:
@@ -12,7 +12,7 @@
         commands:
           - show version
       register: eos_output
-#    - debug: var=eos_output
+    - debug: var=eos_output
 #    - name: "show only version"
 #      debug: var=item
 #      with_items: "{{ eos_output|to_json|from_json|json_query('stdout') }}"
