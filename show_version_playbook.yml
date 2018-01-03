@@ -22,4 +22,4 @@
 #    - debug: msg= {{ modelName }}
 #        internalVersion: "{{ eos_output.msg.stdout_lines.internalVersion }}"
     - name: output to template
-      template: src=/root/git/ansible-testing/showversionshowver_output.j2 dest=/root/git/ansible-testing/showversiontestresults/{{ inventory_hostname }}.showveryam
+      template: src=/root/git/ansible-testing/showversion/showver_output.j2 dest=/root/git/ansible-testing/showversion/testresults/{{ inventory_hostname }}.showveryam
