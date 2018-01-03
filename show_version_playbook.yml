@@ -16,6 +16,7 @@
     - name: setting variables of Output
       set_fact:
         modelName:  "{{ eos_output|json_query('stdout.version') }}"
+    - debug: msg= {{ modelName }}
 #        internalVersion: "{{ eos_output.msg.stdout_lines.internalVersion }}"
 #    - name: output to template
 #      template: src=/root/git/ansible-testing/shversion/showver_output.j2 dest=/root/git/ansible-testing/shversion/testresults/{{ inventory_hostname }}.showveryam
