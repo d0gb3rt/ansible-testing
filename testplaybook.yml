@@ -14,7 +14,7 @@
           use_ssl: no
         gather_subset: all
       register: result
-      debug: msg= "{{ result }}"
+      debug: var=ansible_net_interfaces
     - set_fact:
         fact1: "{{ ansible_net_hostname }}"
     - name: Display Hostname
