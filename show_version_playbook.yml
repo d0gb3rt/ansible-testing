@@ -20,7 +20,7 @@
 #      with_items: "{{ eos_output|to_json|from_json|json_query('stdout') }}"
 #    - name: setting variables of Output
 #      set_fact:
-#        modelName:  "{{ eos_output|json_query('stdout.version') }}"
+#        modelName:  "{{ eos_output|json_query('stdout.version') }}
 #    - debug: msg= {{ modelName }}
 #        internalVersion: "{{ eos_output.msg.stdout_lines.internalVersion }}"
     - name: output to template
