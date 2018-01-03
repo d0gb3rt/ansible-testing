@@ -10,6 +10,7 @@
           - show version
       register: eos_output
     - debug: var= "{{ eos_output }}"
+    - debug: msg= "{{ eos_output }}"
 #    - name: setting variables of Output
 #     set_fact:
 #       modelName:  "{{ eos_command_output.output[0].msg.stdout_lines.modelName }}"
