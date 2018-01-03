@@ -13,7 +13,8 @@
           password: eos
           use_ssl: no
         gather_subset: all
-        #register: result
+      register: result
+      debug: var=result
     - set_fact:
         fact1: "{{ ansible_net_hostname }}"
     - name: Display Hostname
