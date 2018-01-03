@@ -8,8 +8,8 @@
         provider: '{{ eos_connection }}'
         commands:
           - show version
-      register: eos_command_output
-    - debug: var= "{{ eos_command_output }}"
+      register: eos_output
+    - debug: var= "{{ eos_output }}"
 #    - name: setting variables of Output
 #     set_fact:
 #       modelName:  "{{ eos_command_output.output[0].msg.stdout_lines.modelName }}"
