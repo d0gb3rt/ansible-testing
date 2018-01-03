@@ -13,10 +13,10 @@
     - debug: msg= "{{ eos_output }}"
     - name: "Display all cluster names"
       debug: var=eos_output
-      with_items: "{{ eos_output|json_query('stdout.modelName[*]name') }}"
+      with_items: "{{ eos_output|from_json|json_query('stdout.modelName[*]name') }}"
     - name: setting variables of Output
       set_fact:
-        modelName:  "{{ eos_output|json_query('stdout.modelName[*]name') }}"
+        modelName:  "{{ eos_output|from_json|json_query('stdout.modelName[*]name') }}"
 #        internalVersion: "{{ eos_output.msg.stdout_lines.internalVersion }}"
     - name: output to template
       template: src=/root/git/ansible-testing/shversion/showver_output.j2 dest=/root/git/ansible-testing/shversion/testresults/{{ inventory_hostname }}.showveryam
