@@ -11,7 +11,7 @@
         register: eos_command_output
     - name: setting variables of Output
       set_fact:
-        modelName:  "{{ eos_command_output.output[0].stdout_lines.modelName }}"
-        internalVersion: "{{ eos_command_output.output[0].stdout_lines.internalVersion }}"
+        modelName:  "{{ eos_command_output.output[0].msg.stdout_lines.modelName }}"
+        internalVersion: "{{ eos_command_output.output[0].msg.stdout_lines.internalVersion }}"
     - name: output to template
       template: src=/root/git/ansible-testing/shversion/showver_output.j2 dest=/root/git/ansible-testing/shversion/testresults/{{ inventory_hostname }}.showveryam
