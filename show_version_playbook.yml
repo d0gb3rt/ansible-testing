@@ -14,6 +14,7 @@
       register: eos_output
     - debug: var=eos_output
     - local_action: copy content={{ eos_output }} dest=/root/git/ansible-testing/eos_output
+    - local_action: copy content={{ eos_output|to_json }} dest=/root/git/ansible-testing/eos_output_json
 #    - name: "show only version"
 #      debug: var=item
 #      with_items: "{{ eos_output|to_json|from_json|json_query('stdout') }}"
